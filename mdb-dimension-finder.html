@@ -1,0 +1,73 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="bower_components/mdb-radio-list/mdb-radio-list.html">
+<link rel="import" href="bower_components/mdb-help-text/mdb-help-text.html">
+
+<!--
+`mdb-dimension-finder`
+
+
+@demo demo/index.html 
+-->
+
+<dom-module id="mdb-dimension-finder">
+  <template>
+    <style>
+       :host {
+        display: inline-block;
+      }
+      
+       :host header h3 {
+        font-family: Roboto;
+        color: #a2a2a2;
+        font-weight: 400;
+      }
+      
+       :host .dimension-finder {
+        border: 1px solid #dee7ec;
+        border-top: 0;
+      }
+    </style>
+
+    <header>
+      <h3>
+        {{dimension}}
+        <mdb-help-text help-text="{{help-text}}"></mdb-help-text>
+      </h3>
+    </header>
+    <mdb-radio-list size="small" selected="recommendation">
+      <paper-radio-button name="alphabetically">ALPHABETICALLY</paper-radio-button>
+      <paper-radio-button name="recommendation">BY RECOMMENDATION</paper-radio-button>
+    </mdb-radio-list>
+    <div class="dimension-finder">
+      <paper-listbox>
+
+      </paper-listbox>
+    </div>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'mdb-dimension-finder',
+
+      properties: {
+        name: {
+          type: String,
+          value: 'mdb-dimension-finder',
+        },
+
+        dimension: {
+          type: String
+        },
+
+        helpText: {
+          type: String
+        },
+      },
+
+    });
+  </script>
+</dom-module>
