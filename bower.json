@@ -7,8 +7,8 @@
     "paper-item": "PolymerElements/paper-item#^1.2.2",
     "mdb-radio-list": "git://github.com/skamble89/mdb-radio-list.git",
     "mdb-help-text": "git://github.com/skamble89/mdb-help-text.git",
-    "paper-input": "PolymerElements/paper-input#^1.1.24",
-    "iron-input": "PolymerElements/iron-input#^1.0.11"
+    "mdb-simple-list": "git://github.com/skamble89/mdb-simple-list.git",
+    "paper-input": "PolymerElements/paper-input#^1.1.24"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

@@ -5,6 +5,7 @@
 <link rel="import" href="bower_components/mdb-radio-list/mdb-radio-list.html">
 <link rel="import" href="bower_components/mdb-help-text/mdb-help-text.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/mdb-simple-list/mdb-simple-list.html">
 
 <!--
 `mdb-dimension-finder`
@@ -51,18 +52,13 @@
       
        :host header h3 {
         font-family: Roboto;
-        color: #a2a2a2;
+        color: #9a9a9a;
         font-weight: 400;
       }
       
        :host .dimension-finder {
         border: 1px solid #dee7ec;
         border-top: 0;
-      }
-      
-       :host paper-listbox {
-        outline: 0;
-        padding-bottom: 0;
       }
     </style>
 
@@ -77,11 +73,11 @@
       <paper-radio-button name="recommendation">BY RECOMMENDATION</paper-radio-button>
     </mdb-radio-list>
     <div class="dimension-finder">
-      <paper-input placeholder="Search for {{dimension}} name"></paper-input>
-      <paper-listbox>
-      </paper-listbox>
+      <paper-input placeholder="Search for {{dimension}} name" value="{{filter}}"></paper-input>
+      <mdb-simple-list items="{{items}}" height="{{height}}">
+        <content select="template"></content>
+      </mdb-simple-list>
     </div>
-
   </template>
 
   <script>
@@ -103,19 +99,41 @@
           type: String
         },
 
+        height: {
+          type: Number,
+          value: 320
+        },
+
+        _items: {
+          type: Array
+        },
+
         items: {
           type: Array
+        },
+
+        searchProperty: {
+          type: String,
+          value: 'name'
+        },
+
+        filter: {
+          type: String,
+          observer: '_searchDimension'
         }
       },
 
-      attached: function () {
-        var list = this.querySelector('paper-listbox');
-        if (list) {
-          for (var i = 0; i < this.items.length; i++) {
-            var item = document.createElement('paper-item');
-            item.textContent = this.items[i].name;
-            Polymer.dom(list).appendChild(item);
-          }
+      ready: function () {
+        this._items = this.items.slice();
+        this._isReady = true;
+      },
+
+      _searchDimension: function () {
+        var that = this;
+        if (this._isReady) {
+          this.items = this._items.filter(function (e) {
+            return e[that.searchProperty].toLowerCase().indexOf(that.filter.toLowerCase()) > -1;
+          })
         }
       }
     });
