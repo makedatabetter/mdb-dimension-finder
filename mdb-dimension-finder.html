@@ -3,9 +3,10 @@
 <link rel="import" href="bower_components/paper-item/paper-item.html">
 <link rel="import" href="bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="bower_components/mdb-radio-list/mdb-radio-list.html">
-<link rel="import" href="bower_components/mdb-help-text/mdb-help-text.html">
+<link rel="import" href="bower_components/mdb-title/mdb-title.html">
 <link rel="import" href="bower_components/paper-input/paper-input.html">
 <link rel="import" href="bower_components/mdb-simple-list/mdb-simple-list.html">
+<link rel="import" href="bower_components/font-roboto/font-roboto.html">
 
 <!--
 `mdb-dimension-finder`
@@ -48,12 +49,11 @@
           padding: 5px;
           width: 95%;
         }
-      }
-      
-       :host header h3 {
-        font-family: Roboto;
-        color: #9a9a9a;
-        font-weight: 400;
+        --mdb-title: {
+          font-family: Roboto;
+          color: #9a9a9a;
+          font-weight: 400;
+        }
       }
       
        :host .dimension-finder {
@@ -62,12 +62,7 @@
       }
     </style>
 
-    <header>
-      <h3>
-        {{dimension}}
-        <mdb-help-text help-text="{{help-text}}"></mdb-help-text>
-      </h3>
-    </header>
+    <mdb-title title-text="{{dimension}}" help-text="{{help-text}}"></mdb-title>
     <mdb-radio-list size="small" selected="{{sort}}">
       <paper-radio-button name="alphabetically">ALPHABETICALLY</paper-radio-button>
       <paper-radio-button name="recommendation">BY RECOMMENDATION</paper-radio-button>
