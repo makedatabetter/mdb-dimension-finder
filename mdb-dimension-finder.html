@@ -68,12 +68,12 @@
         <mdb-help-text help-text="{{help-text}}"></mdb-help-text>
       </h3>
     </header>
-    <mdb-radio-list size="small" selected="recommendation">
+    <mdb-radio-list size="small" selected="{{sort}}">
       <paper-radio-button name="alphabetically">ALPHABETICALLY</paper-radio-button>
       <paper-radio-button name="recommendation">BY RECOMMENDATION</paper-radio-button>
     </mdb-radio-list>
     <div class="dimension-finder">
-      <paper-input placeholder="Search for {{dimension}} name" value="{{filter}}"></paper-input>
+      <paper-input placeholder="Search for {{_lowercaseDimension}} name" value="{{filter}}"></paper-input>
       <mdb-simple-list items="{{items}}" height="{{height}}">
         <content select="template"></content>
       </mdb-simple-list>
@@ -93,6 +93,11 @@
 
         dimension: {
           type: String
+        },
+
+        _lowercaseDimension: {
+          type: String,
+          computed: '_lowerCase(dimension)'
         },
 
         helpText: {
@@ -120,6 +125,12 @@
         filter: {
           type: String,
           observer: '_searchDimension'
+        },
+
+        sort: {
+          type: String,
+          value: 'recommendation',
+          observer: '_sortDimension'
         }
       },
 
@@ -128,12 +139,17 @@
         this._isReady = true;
       },
 
+      _lowerCase: function (str) {
+        return str.toLowerCase();
+      },
+
       _searchDimension: function () {
         var that = this;
         if (this._isReady) {
-          this.items = this._items.filter(function (e) {
-            return e[that.searchProperty].toLowerCase().indexOf(that.filter.toLowerCase()) > -1;
-          })
+          this.items = this._items
+            .filter(function (e) {
+              return e[that.searchProperty].toLowerCase().indexOf(that.filter.toLowerCase()) > -1;
+            });
         }
       }
     });
