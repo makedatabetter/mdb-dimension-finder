@@ -1,8 +1,10 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
 <link rel="import" href="bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="bower_components/mdb-radio-list/mdb-radio-list.html">
 <link rel="import" href="bower_components/mdb-help-text/mdb-help-text.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
 
 <!--
 `mdb-dimension-finder`
@@ -16,6 +18,35 @@
     <style>
        :host {
         display: inline-block;
+        --paper-input-container-color: #bbb;
+        --paper-input-container-focus-color: #bbb;
+        --paper-input-container-underline: {
+          color: transparent;
+          height: 0;
+          border: 0;
+        }
+        --paper-input-container-underline-focus: {
+          color: transparent;
+          height: 0;
+          border: 0;
+        }
+        --paper-input-container-underline-disabled: {
+          color: transparent;
+          height: 0;
+          border: 0;
+        }
+        --paper-input-container: {
+          padding-top: 0;
+          padding-bottom: 0;
+          padding-left: var(--standard-padding, 20px);
+          padding-right: var(--standard-padding, 20px);
+          border: 0;
+        }
+        --paper-input-container-input: {
+          border: 1px solid #e8edf1;
+          padding: 5px;
+          width: 95%;
+        }
       }
       
        :host header h3 {
@@ -27,6 +58,11 @@
        :host .dimension-finder {
         border: 1px solid #dee7ec;
         border-top: 0;
+      }
+      
+       :host paper-listbox {
+        outline: 0;
+        padding-bottom: 0;
       }
     </style>
 
@@ -41,8 +77,8 @@
       <paper-radio-button name="recommendation">BY RECOMMENDATION</paper-radio-button>
     </mdb-radio-list>
     <div class="dimension-finder">
+      <paper-input placeholder="Search for {{dimension}} name"></paper-input>
       <paper-listbox>
-
       </paper-listbox>
     </div>
 
@@ -66,8 +102,22 @@
         helpText: {
           type: String
         },
+
+        items: {
+          type: Array
+        }
       },
 
+      attached: function () {
+        var list = this.querySelector('paper-listbox');
+        if (list) {
+          for (var i = 0; i < this.items.length; i++) {
+            var item = document.createElement('paper-item');
+            item.textContent = this.items[i].name;
+            Polymer.dom(list).appendChild(item);
+          }
+        }
+      }
     });
   </script>
 </dom-module>
