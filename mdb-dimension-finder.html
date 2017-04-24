@@ -1,12 +1,12 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-listbox/paper-listbox.html">
-<link rel="import" href="../paper-item/paper-item.html">
-<link rel="import" href="../paper-item/paper-icon-item.html">
-<link rel="import" href="../mdb-radio-list/mdb-radio-list.html">
-<link rel="import" href="../mdb-title/mdb-title.html">
-<link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../mdb-simple-list/mdb-simple-list.html">
-<link rel="import" href="../font-roboto/font-roboto.html">
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="bower_components/paper-item/paper-item.html">
+<link rel="import" href="bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="bower_components/mdb-radio-list/mdb-radio-list.html">
+<link rel="import" href="bower_components/mdb-title/mdb-title.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/mdb-simple-list/mdb-simple-list.html">
+<link rel="import" href="bower_components/font-roboto/font-roboto.html">
 
 <!--
 `mdb-dimension-finder`
@@ -143,7 +143,7 @@
         if (this._isReady) {
           this.items = this._items
             .filter(function (e) {
-              return e[that.searchProperty].toLowerCase().indexOf(that.filter.toLowerCase()) > -1;
+              return (typeof e === typeof {} ? e[that.searchProperty] : e).toLowerCase().indexOf(that.filter.toLowerCase()) > -1;
             });
         }
       }
