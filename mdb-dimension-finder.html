@@ -114,15 +114,10 @@ Custom property | Description | Default
       <paper-radio-button name="recommendation">BY RECOMMENDATION</paper-radio-button>
     </mdb-radio-list>
     <div class="dimension-finder">
-      <paper-input placeholder="Search for [[_toLowerCase(dimension)]] name" value="{{filter}}"></paper-input>
-      <!--<template is="dom-if" if="{{items.length}}">-->
-      <mdb-simple-list height="{{height}}" items="{{items}}">
+      <paper-input placeholder="Search for [[_toLowerCase(dimension)]] name" value="{{filter}}"></paper-input>      
+      <mdb-simple-list height="{{height}}" items="{{items}}" empty-message="{{emptyMessage}}">
         <content select="template"></content>
-      </mdb-simple-list>
-      <!--</template>
-      <template is="dom-if" if="{{!items.length}}">
-        <mdb-title class="empty-message" level="3">[[emptyMessage]]</mdb-title>
-      </template>-->
+      </mdb-simple-list>      
     </div>
   </template>
 
